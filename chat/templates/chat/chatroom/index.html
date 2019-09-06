@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Chatrooms List</h1>
+    {% if chatroom_list %}
+        <table style="border: 3px">
+            <thead>
+                <th></th>
+                <th>Chatroom Name</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                {% for chatroom in chatroom_list %}
+                    <tr>
+                        <td></td>
+                        <td>{{chatroom.name}}</td>
+                        <td>
+                            <a href="{{ chatroom.get_absolute_url }}">Got to Chatroom</a> |
+                            <a href="{% url 'chat:chatroom-edit' chatroom.id %}">Edit</a> |
+                            <a href="{% url 'chat:chatroom-delete' chatroom.id %}">Delete</a> |
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are no chatroom.</p>
+    {% endif %}
+{% endblock content %}
